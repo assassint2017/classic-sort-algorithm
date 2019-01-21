@@ -48,8 +48,8 @@ int main()
 	// selection_sort(array, arrayMaxLen);  // 选择排序 7161ms
 	// heap_sort(array, arrayMaxLen);  // 堆排序 15ms  
 	// merge_sort_recursive(array, arrayMaxLen);  // 归并排序 递归版本 12.5ms 
-	merge_sort_nonrecursive(array, arrayMaxLen);  // 归并排序 非递归版本 ms
-	// quick_sort(array, arrayMaxLen);  // 快速排序 ms
+	// merge_sort_nonrecursive(array, arrayMaxLen);  // 归并排序 非递归版本 9ms
+	// quick_sort(array, arrayMaxLen);  // 快速排序 8ms
 
 	// 停止计时
 	clock_t end = clock();

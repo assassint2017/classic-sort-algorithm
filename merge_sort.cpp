@@ -6,8 +6,12 @@
 具有稳定性
 
 算法有两种实现的方法，分别是递归和非递归的
+
+归并排序在内部排序的时候基本上不会被使用，因为会占用额外的空间
+但是在外部排序中就相当有用了
 */
 
+// 递归版本的代码
 void merge(int array[], int tempArray[], int left, int mid, int right)
 {
 	int leftPtr = left;
@@ -49,7 +53,6 @@ void m_sort(int array[], int tempArray[], int left, int right)
 	}
 }
 
-// 递归版本的代码
 void merge_sort_recursive(int array[], int n)
 {
 	// 申请一个临时数组
@@ -60,8 +63,54 @@ void merge_sort_recursive(int array[], int n)
 	delete[] tempArray;
 }
 
+
+
 // 非递归版本的代码
+void merge1(int array1[], int array2[], int left, int mid, int right)
+{
+	int leftPtr = left;
+	int rightPtr = mid + 1;
+	int allPtr = left;
+
+	while (leftPtr <= mid && rightPtr <= right)
+	{
+		if (array1[leftPtr] < array1[rightPtr])
+			array2[allPtr++] = array1[leftPtr++];
+		else
+			array2[allPtr++] = array1[rightPtr++];
+	}
+	while (leftPtr <= mid)
+		array2[allPtr++] = array1[leftPtr++];
+	while (rightPtr <= right)
+		array2[allPtr++] = array1[rightPtr++];	
+}
+
+void merge_pass(int array1[], int array2[], int n, int length)
+{
+	int i;
+	for (i = 0; i <= n - 2 * length; i += 2 * length)
+		merge1(array1, array2, i, i + length - 1, i + 2 * length - 1);
+	if (i + length < n)
+		merge1(array1, array2, i, i + length - 1, n - 1);
+	else
+	{
+		for (; i < n; i++)
+			array2[i] = array1[i];
+	}
+}
+
 void merge_sort_nonrecursive(int array[], int n)
 {
+	int *tempArray = new int[n]();
+	int length = 1;
 
+	while (length < n)
+	{
+		merge_pass(array, tempArray, n, length);
+		length *= 2;
+		merge_pass(tempArray, array, n, length);
+		length *= 2;
+	}
+
+	delete[] tempArray;
 }
