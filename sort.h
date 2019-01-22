@@ -11,6 +11,9 @@ void selection_sort(int array[], int n);
 void heap_sort(int array[], int n);
 void merge_sort_recursive(int array[], int n);
 void merge_sort_nonrecursive(int array[], int n);
-void quick_sort(int arrayp[], int n);
+void quick_sort(int array[], int n);
+void bucket_sort(int array[], int n, int numBucket);
+void radix_sort(int array[], int n, int pass, int numBucket);
+int* table_sort(int array[], int n);
 
 #endif // ! SORT_H

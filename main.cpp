@@ -10,6 +10,9 @@
 5：堆排序
 6: 归并排序
 7：快速排序
+8：桶排序
+9：基数排序
+10：表排序
 */
 
 #include<iostream>
@@ -49,7 +52,10 @@ int main()
 	// heap_sort(array, arrayMaxLen);  // 堆排序 15ms  
 	// merge_sort_recursive(array, arrayMaxLen);  // 归并排序 递归版本 12.5ms 
 	// merge_sort_nonrecursive(array, arrayMaxLen);  // 归并排序 非递归版本 9ms
-	// quick_sort(array, arrayMaxLen);  // 快速排序 8ms
+	quick_sort(array, arrayMaxLen);  // 快速排序 8ms
+	// bucket_sort(array, arrayMaxLen, 1000);  // 桶排序 25ms
+	// radix_sort(array, arrayMaxLen, 6, 10); // 基数排序 142ms
+	// int *table = table_sort(array, arrayMaxLen);  // 表排序 6780ms
 
 	// 停止计时
 	clock_t end = clock();
@@ -62,6 +68,15 @@ int main()
 		if (i % 20 == 0)
 			cout << endl;
 	}
+
+	//// 表排序 打印已经排序好的数组
+	//cout << "-----------------after sort------------------" << endl;
+	//for (int i = 0; i < arrayMaxLen; i++)
+	//{
+	//	cout << setw(4) << array[table[i]] << ' ';
+	//	if (i % 20 == 0)
+	//		cout << endl;
+	//}
 
 	// 打印排序算法消耗时间
 	cout << endl << "time: " << static_cast<double>(end - start) << " ms" << endl;
