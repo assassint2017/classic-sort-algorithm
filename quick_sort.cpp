@@ -64,7 +64,7 @@ void sort(int array[], int left, int right)
 		while (true)
 		{
 			while (array[++leftPtr] < pivot);
-			while (array[--rightPtr] > pivot);
+			while (rightptr > leftptr && array[--rightptr] > pivot);
 			if (leftPtr < rightPtr)
 			{
 				int temp = array[leftPtr];
