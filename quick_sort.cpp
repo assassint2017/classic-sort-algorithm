@@ -16,37 +16,16 @@
 
 int median3(int array[], int left, int right)
 {
-	// 首先计算中点的位置
 	int mid = (left + right) / 2;
 
-	// 下面的三个判断把数组的头、中、尾调整为从小到大的顺序
 	if (array[left] > array[mid])
-	{
-		int temp = array[left];
-		array[left] = array[mid];
-		array[mid] = temp;
-	}
+		std::swap(array[left], array[mid]);
 	if (array[left] > array[right])
-	{
-		int temp = array[left];
-		array[left] = array[right];
-		array[right] = temp;
-	}
+		std::swap(array[left], array[right]);
 	if (array[mid] > array[right])
-	{
-		int temp = array[mid];
-		array[mid] = array[right];
-		array[right] = temp;
-	}
+		std::swap(array[mid], array[right]);
 
-	// 接下来将中位数与右边的倒数第二个数进行交换
-	{
-		int temp = array[mid];
-		array[mid] = array[right - 1];
-		array[right - 1] = temp;
-	}
-
-	// 最后返回中位数作为主元
+	std::swap(array[mid], array[right - 1]);
 	return array[right - 1];
 }
 
@@ -54,39 +33,26 @@ void sort(int array[], int left, int right)
 {
 	if (left < right)
 	{
-		// 首先选取主元
 		int pivot = median3(array, left, right);
-
-		// 子集划分
-		int leftPtr = left;
-		int rightPtr = right - 1;
+		int leftPtr = left, rightPtr = right - 1;
 
 		while (true)
 		{
 			while (array[++leftPtr] < pivot);
-			while (rightptr > leftptr && array[--rightptr] > pivot);
+			while (leftPtr < rightPtr && array[--rightPtr] > pivot);
+
 			if (leftPtr < rightPtr)
-			{
-				int temp = array[leftPtr];
-				array[leftPtr] = array[rightPtr];
-				array[rightPtr] = temp;
-			}
-			else break;
+				std::swap(array[leftPtr], array[rightPtr]);
+			else
+				break;
 		}
 
-		// 将主元交换到最终的正确位置
-		if (leftptr < right)
-		{
-			int temp = array[leftptr];
-			array[leftptr] = array[right - 1];
-			array[right - 1] = temp;
-		}
+		if (leftPtr < right)
+			std::swap(array[leftPtr], array[right - 1]);
 
-		// 分别递归的去处理左右两个子序列
 		sort(array, left, leftPtr - 1);
 		sort(array, leftPtr + 1, right);
 	}
-	
 }
 
 void quick_sort(int array[], int n)
